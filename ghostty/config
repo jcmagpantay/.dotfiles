@@ -1,0 +1,13 @@
+theme = iceberg-dark
+background-opacity = 0.65
+cursor-style = block
+cursor-style-blink = false
+shell-integration-features = no-cursor
+font-family = MeslosLGS NF
+font-size = 16
+title = " "
+macos-titlebar-proxy-icon = hidden
+macos-icon = paper
+window-width = 1460
+window-height = 550
+background-blur = 16
