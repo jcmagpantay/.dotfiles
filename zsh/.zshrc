@@ -104,4 +104,21 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # ALL EXPORT PATHS and ALIASES here
-source ~/.zshrc.pre-oh-my-zsh
+# Exported PATHS
+export PATH="$PATH:/Applications/dev/flutter/bin"
+export PATH=${PATH}:/Users/jm/mongodb-macos-aarch64-8.0.4/bin
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Aliases
+alias startmongo='sudo mongod --dbpath=/Users/jennifer/data/db'
+alias python="python3"
+alias term_conf="nvim ~/.config/ghostty/config"
+alias ls="eza --icons --sort=type"
+alias tree="eza --icons --tree --level=1"
+alias ll="eza --icons -alh"
+alias cd="z"
+alias cdi="zi"
+
+eval "$(zoxide init zsh)"
