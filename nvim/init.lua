@@ -185,10 +185,10 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -200,10 +200,10 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
--- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
--- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
--- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
--- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+vim.keymap.set('n', '<C-S-h>', '<C-w>H', { desc = 'Move window to the left' })
+vim.keymap.set('n', '<C-S-l>', '<C-w>L', { desc = 'Move window to the right' })
+vim.keymap.set('n', '<C-S-j>', '<C-w>J', { desc = 'Move window to the lower' })
+vim.keymap.set('n', '<C-S-k>', '<C-w>K', { desc = 'Move window to the upper' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -660,6 +660,7 @@ require('lazy').setup({
       --  When you add blink.cmp, luasnip, etc. Neovim now has *more* capabilities.
       --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
+      require('lspconfig').gdscript.setup(capabilities)
 
       -- Enable the following language servers
       --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -682,8 +683,6 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
-        --
-
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -876,25 +875,16 @@ require('lazy').setup({
     },
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
     config = function()
-      ---@diagnostic disable-next-line: missing-fields
-      require('tokyonight').setup {
-        styles = {
-          comments = { italic = false }, -- Disable italics in comments
-        },
+      require('catppuccin').setup {
+        transparent_background = true,
+        flavour = 'mocha',
       }
-
-      -- Load the colorscheme here.
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'catppuccin'
     end,
   },
 
@@ -975,8 +965,8 @@ require('lazy').setup({
   --
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
-  -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
